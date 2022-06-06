@@ -16,7 +16,7 @@
 <meta property="og:description" content="一、 初始MySQLjavaEE:企业级java开发  web 前端（页面：展示，数据！） 后台（连接点：链接数据库JDBC，链接前端（控制，控制视图跳转，和给前端传递数据）） 数据库（存数据，Text，Excel，word）  只会写代码，学好数据库，基本混饭吃！ 学好操作系统，数据结构与算法！当一个不错的程序猿！ 离散数学，数字电路，体系结构，编译原理。+实战经验，高级程序员~优秀的程序员">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-27T14:22:46.000Z">
-<meta property="article:modified_time" content="2022-05-27T15:04:20.821Z">
+<meta property="article:modified_time" content="2022-05-29T15:25:39.800Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="视频内容笔记">
 <meta name="twitter:card" content="summary">
@@ -435,6 +435,118 @@
 <li>字段是可以省略的，但是后面的值必须要一一对应，不能少</li>
 <li>可以同时插入多条数据，VALUES后面的值，需要使用，隔开即可 VALUES(),(),…….</li>
 </ul>
+<h2 id="3-4、修改"><a href="#3-4、修改" class="headerlink" title="3.4、修改"></a>3.4、修改</h2><blockquote>
+<p>update   修改谁  （条件）   set 原来的值&#x3D;新值</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 修改学员名字，带了简介</span></span><br><span class="line"><span class="keyword">UPDATE</span> `student` <span class="keyword">SET</span> `name`<span class="operator">=</span><span class="string">&#x27;小吴&#x27;</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 不指定条件的情况下，会改动所有表</span></span><br><span class="line"><span class="keyword">UPDATE</span> `student` <span class="keyword">SET</span> `name` <span class="operator">=</span> <span class="string">&#x27;小吴七号&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改多个属性，逗号隔开</span></span><br><span class="line"><span class="keyword">UPDATE</span> `student` <span class="keyword">SET</span> `name`<span class="operator">=</span>`小吴`,`email`<span class="operator">=</span><span class="string">&#x27;1565868227@qq.com&#x27;</span> <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--语法</span></span><br><span class="line"><span class="comment">-- UPDATE 表名 set colnum_name = value.[colnum_name = value,....] where [条件]</span></span><br></pre></td></tr></table></figure>
+
+<p>条件：where 子句 运算符 id等于某个值，大于某个值，在某个区间内修改……</p>
+<p>操作符会返回  布尔值</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>含义</th>
+<th align="center">范围</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x3D;</td>
+<td>等于</td>
+<td align="center">5&#x3D;6</td>
+<td>false</td>
+</tr>
+<tr>
+<td>&lt;&gt;或！&#x3D;</td>
+<td>不等于</td>
+<td align="center">5&lt;&gt;6</td>
+<td>true</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;&#x3D;</td>
+<td></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;&#x3D;</td>
+<td></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr>
+<td>BETWEEN…and…</td>
+<td>在某个范围内</td>
+<td align="center">[2,5]</td>
+<td></td>
+</tr>
+<tr>
+<td>AND</td>
+<td>我和你&amp;&amp;</td>
+<td align="center">5&gt;1and1&gt;2</td>
+<td>false</td>
+</tr>
+<tr>
+<td>OR</td>
+<td>我或你||</td>
+<td align="center">5&gt;1or1&gt;2</td>
+<td>true</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 通过多个条件定位数据</span></span><br><span class="line"><span class="keyword">UPDATE</span> `student` <span class="keyword">SET</span> `name`<span class="operator">=</span>`小吴七号` <span class="keyword">WHERE</span> `name`<span class="operator">=</span>`小张<span class="number">7</span>号` <span class="keyword">AND</span> sex<span class="operator">=</span>`女`</span><br></pre></td></tr></table></figure>
+
+<p>语法：UPDATE 表名 set colnum_name &#x3D; value.[colnum_name &#x3D; value,….] where [条件]</p>
+<p>注意：</p>
+<ul>
+<li>colnum_name 是数据库的列，尽量带上&#96;&#96;</li>
+<li>条件，筛选的条件，如果没有指定，则会修改所有的列</li>
+<li>value，是一个具体的值，也可以是一个变量</li>
+<li>多个设置的属性之间，使用英文逗号隔开</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> `student` <span class="keyword">SET</span> `birthday`<span class="operator">=</span><span class="built_in">CURRENT_TIME</span> <span class="keyword">WHERE</span> `name`<span class="operator">=</span><span class="string">&#x27;小吴七号&#x27;</span> <span class="keyword">AND</span> sex<span class="operator">=</span><span class="string">&#x27;女&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>3.5、删除</p>
+<blockquote>
+<p>delete 命令</p>
+</blockquote>
+<p>语法：delete from 表名 [where 条件]</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 删除数据  （避免这样写，会全部删除）</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> `student`</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除指定数据</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> `student` <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>TRUNCATE 命令</p>
+</blockquote>
+<p>作用：完全清空一个数据库表，表的结构和索引约束不会变！</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 清空 student 表</span></span><br><span class="line">TRUNCANT `student`</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>delete的 TRUNCATE 区别</p>
+</blockquote>
+<p>相同点：都能删除数据，都不会删除表结构</p>
+<p>不同点：</p>
+<ul>
+<li>TRUNCATE  重新设置  自增列  计数器会归零</li>
+<li>TRUNCATE   不会影响事务</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 测试delete 和TRUNCATE 区别</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `test`(</span><br><span class="line">   `id` <span class="type">INT</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    `coll` <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY(`id`)</span><br><span class="line">)ENGINE<span class="operator">=</span>INNODB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> INFO `test`(`coll`) <span class="keyword">VALUES</span>(<span class="string">&#x27;1&#x27;</span>)(<span class="string">&#x27;2&#x27;</span>)(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> `test` <span class="comment">--不会影响自增</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> `test` <span class="comment">--自增会归零</span></span><br></pre></td></tr></table></figure>
+
+<p>了解即可：DELETE删除的问题，重启数据库，现象</p>
+<ul>
+<li>InnoDB  自增列会从1开始（存在内存当中的，断电即失）</li>
+<li>MyISAM   继续从上一个自增量开始（存在文件中的，不会丢失）</li>
+</ul>
 
       
 
@@ -538,6 +650,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2022/05/29/%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E9%A2%98%EF%BC%9A%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          编程第一题：数组中重复的数字
+        
+      </div>
+    </a>
   
   
     <a href="/2022/05/26/java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
@@ -667,15 +788,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">使用方法大全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">视频内容笔记</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">使用方法大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">自己查找</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">b博客创建过程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">视频笔记</a>
               </li>
              
               <li class="article-tag-list-item">
